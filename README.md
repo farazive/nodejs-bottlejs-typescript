@@ -1,4 +1,4 @@
-##Nodejs typescript application with BottleJS Dependency injection container
+## Nodejs typescript application with BottleJS Dependency injection container
 
 Steps to run:
 * npm install
