@@ -31,6 +31,6 @@ export class Kernel {
     }
 
     boot() {
-        console.log(this.container.talk.talk("faraz"));
+        return this.container.talk.talk("faraz");
     }
 }

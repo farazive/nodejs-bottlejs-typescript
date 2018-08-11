@@ -12,7 +12,7 @@ class Application {
     }
 
     boot() {
-        this.kernel.boot();
+        return this.kernel.boot();
     }
 }
 
@@ -20,6 +20,10 @@ class Application {
 const kernel = new Kernel();
 const app = new Application(kernel);
 
+// log to cloudfront
+console.log('cloudfront log: ' + app.boot());
 
 // Run
-app.boot();
+export let handler = async function (event, context, callback) {
+    return app.boot();
+};
