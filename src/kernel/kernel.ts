@@ -1,8 +1,19 @@
 'use strict';
 
+import * as Bottle from "bottlejs";
 import {Container} from "./container";
+import {SayHello} from "../service/say-hello";
+import {SayBye} from "../service/say-bye";
+import {Talk} from "../service/talk";
+import {IContainer} from "bottlejs";
 
-const Bottle = require("bottlejs");
+declare module "bottlejs" { // Use the same module name as the import string
+    interface IContainer {
+        sayHello: SayHello;
+        sayBye: SayBye;
+        talk: Talk
+    }
+}
 
 /**
  * @name Kernel
@@ -10,7 +21,7 @@ const Bottle = require("bottlejs");
  */
 export class Kernel {
 
-    private container;
+    private container: IContainer;
 
     /**
      * Builds the Kernel and container
@@ -30,7 +41,12 @@ export class Kernel {
         this.container = containerBuilder.container;
     }
 
+    getContainer() {
+        return this.container;
+    }
+
     boot() {
-        return this.container.talk.talk("faraz");
+        console.log('kernel booted');
+        // return this.container.talk.talkMethod("faraz");
     }
 }

@@ -11,6 +11,10 @@ class Application {
     constructor(private kernel: Kernel) {
     }
 
+    getContainer() {
+        return this.kernel.getContainer();
+    }
+
     boot() {
         return this.kernel.boot();
     }
@@ -20,10 +24,15 @@ class Application {
 const kernel = new Kernel();
 const app = new Application(kernel);
 
-// log to cloudfront
-// console.log('cloudfront log: ' + app.boot());
+//comment manual app booting with running lambda
+app.boot();
 
-// Run
+// log to cloudfront
+console.log('cloudfront log: ' + app.getContainer().talk.talkMethod("faraz"));
+
+// Run lambda
 export let handler = async function (event, context, callback) {
-    return app.boot();
+
+    app.boot();
+    return app.getContainer().talk.talkMethod("faraz");
 };
